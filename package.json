@@ -1,0 +1,36 @@
+{
+  "name": "react-jairo",
+  "version": "0.0.0",
+  "description": "Isomorphic React Example",
+  "main": "app.js",
+  "scripts": {
+    "watch": "watchify app.js -o dist/public/js/bundle.js -v",
+    "browserify": "browserify app.js | uglifyjs > dist/public/js/bundle.js",
+    "build": "npm run browserify",
+    "start": "gulp build & nodemon dist/server.js"
+  },
+  "author": "João Lucas Lucchetta",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "consolidate": "0.13.x",
+    "express": "4.x",
+    "handlebars": "4.x",
+    "lodash": "^3.10.1",
+    "mysql": "^2.9.0",
+    "node-uuid": "^1.4.7",
+    "react": "0.14.x",
+    "react-dom": "0.14.x",
+    "request-promise": "1.x",
+    "sequelize": "3.x"
+  },
+  "devDependencies": {
+    "envify": "~1.2.1",
+    "browserify": "~4.2.0",
+    "gulp": "^3.8.5",
+    "gulp-notify": "~1.4.0",
+    "gulp-util": "3.x",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "~0.1.1",
+    "watchify": "~0.10.2"
+  }
+}

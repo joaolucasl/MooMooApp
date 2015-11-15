@@ -1,0 +1,7 @@
+{
+  "host": "localhost",
+  "dialect": "mysql",
+  "username": "jairo-app",
+  "password": "jairo-app",
+  "database": "jairo"
+}
