@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var PostsList = require('./PostsList.jsx');
+var LeftNavbar = require('./LeftNavbar.jsx');
 
 var PostsApp = React.createClass({
   getInitialState:  function(){
@@ -18,9 +19,25 @@ var PostsApp = React.createClass({
       );
   },
   render: function () {
+
+    var navbarLinks = [
+
+    {
+      href:"a",
+      title:"AAA"
+      },
+    {
+      href:"b",
+      title:"BBB"
+      }
+    ]
+
+
+
     return (
       <div className="posts-app">
-      <PostsList posts={this.state.posts} />
+      <LeftNavbar links={navbarLinks}/>
+        <PostsList posts={this.state.posts} />
       </div>
     );
   }

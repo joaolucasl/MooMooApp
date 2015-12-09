@@ -12,8 +12,8 @@ var db = new Sequelize(config.database, config.username, config.password, {
  * Importing the Database models, and then creating their
  * respective relations...
  */
-var Post = db.import(__dirname + '/../models/Post.js');
-var Comment = db.import(__dirname + '/../models/Comment.js');
+var Post = db.import('../models/Post_DB.js');
+var Comment = db.import('../models/Comment_DB.js');
 
 Comment.belongsTo(Post);
 

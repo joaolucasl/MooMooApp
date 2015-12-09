@@ -4,6 +4,7 @@ var express = require("express");
 var cons = require("consolidate");
 var hs = require("handlebars");
 var fs = require("fs");
+var http = require("http");
 var path = require("path");
 var routes = require(__dirname + "/routes/routes")
 
@@ -33,7 +34,6 @@ fs.readdirSync(partials).forEach(function (file) {
   hs.registerPartial(partial, source);
 });
 
-
 // Setting the routes.js file as the responsible for the main routes.
 app.use('/', routes);
 
@@ -43,3 +43,8 @@ var server = app.listen(3000, function () {
 
   console.log('App listening at http://%s:%s', host, port);
 });
+
+
+// Starting Socket stuff
+var socket = require(__dirname + '/controllers/socket');
+socket.listen(server);

@@ -1,8 +1,11 @@
 var express = require("express");
 var router = express.Router();
-var DB = require('../database/db.js');
 var postController = require('../controllers/posts');
+var socket = require('../controllers/socket');
+
+var DB = require('../database/db.js');
 var Posts = DB.models.Post;
+
 
 
 router.get("/", function (req, res) {
@@ -28,5 +31,10 @@ router.get("/", function (req, res) {
 })
 
 router.get("/posts/", postController.listAllPosts);
+
+router.get("/posts/send/", function (req, res) {
+  socket.emitToAll("HEY!");
+  res.send("Ok");
+});
 
 module.exports = router;

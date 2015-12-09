@@ -9,3 +9,9 @@ DOM.render(
   <PostsApp posts={initialState} />,
   document.getElementById('Posts-App')
 );
+
+
+// ===== jQuery section for UI components functions ========
+
+// Sidebar toggle initialisation
+$(".button-collapse").sideNav();

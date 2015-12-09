@@ -16,13 +16,24 @@ var PostsList = React.createClass({
     */
     var posts = this.props.posts.map(function(post){
         return (
-        <Post key={post.id} uuid={post.uuid} content={post.content} createdAt={post.createdAt} lat={post.latitude} long={post.longitude} />
+
+          <Post key={post.id} uuid={post.uuid} content={post.content} createdAt={post.createdAt} lat={post.latitude} long={post.longitude} />
+
         )
     });
 
+
     // And rendering it
     return (
-    <div className="post-list">{posts}</div>
+
+      <div className="">
+        <div className="post-list center-align">{posts}</div>
+        <div className="fixed-action-btn">
+        <a className="btn-floating btn-large waves-effect waves-light amber">
+            <i className="material-icons">add</i>
+        </a>
+        </div>
+      </div>
     )
   }
 });
