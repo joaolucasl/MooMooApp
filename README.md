@@ -15,22 +15,29 @@ After downloading or cloning this repository, you should go to the `src` folder,
    
    *Note: The system is being developed with MySQL, but if you want to use PostgreSQL, for instance, you can do so by updating the `package.json` with the respective libraries and `src/config/config.json` to reflect so.*
    
+   
    This project uses [Gulp](http://gulpjs.com) to run tasks (primarily to transpile and bundle our React code and its dependencies). Before running the project, run:
    
-    $ gulp build
+    $ gulp 
     
 This will bundle the project code (Components, etc), React and ReactDOM libraries and other dependencies to `/public/js/app.js`, which will be required in the client-side of our application.
+
 
  Finally, you can run the server, by running:
 
     $ node server.js
 
-Note that the server, won't restart itself if any error happens using the `node` command. Using the `nodemon` package is the ideal for 
+Note that the server won't restart itself if any errors happen using the `node` command. Using the `nodemon` package is the ideal for that matter.
+
+CODEBASE/CONTRIBUTING
+--------
+  [ESLint](http://eslint.org/) is being used to create a standard for our codebase. If you plan on sending a PR, please check that you code is compliant with this project's `.eslintrc.json` rules via ESLint. Our ruleset is initally based on AirBNB ECAMScript5 styleguide (Now called `airbnb/legacy`) with addition of custom rules.
+  Since this is a project meant for the author learning good development practices, there ain't a need for new contributors. If you feel the need/will to do so, please contact the author.
 
 LICENCE
 ---------
-This project is licensed under the terms of the GNU General Public License ([GPLv3](http://www.gnu.org/licenses/gpl-3.0.html)). 
-A copy of this license can be also found in this repository, in `LICENCE.MD` .
+This project is licensed under the terms of the GNU General Public License v3.0 ([GPLv3](http://www.gnu.org/licenses/gpl-3.0.html)). 
+A copy of this licence can be also found in this repository, in `LICENCE.MD` .
  
 
 

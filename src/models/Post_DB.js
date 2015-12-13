@@ -31,4 +31,4 @@ module.exports = function (DB, Sequelize) {
       type: Sequelize.FLOAT
     }
   });
-}
+};

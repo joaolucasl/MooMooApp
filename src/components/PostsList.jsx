@@ -1,5 +1,4 @@
 var React = require('react');
-var ReactDOM = require('react-dom');
 var Post = require('./Post.jsx');
 
 
@@ -8,24 +7,21 @@ var Post = require('./Post.jsx');
  * It creates child components
  */
 var PostsList = React.createClass({
-  render: function(){
-
+  render: function () {
     /*
-    * Creating an array of Post components holding
-    * individual data of each post
+    *  Creating an array of `Post` components that hold
+    *  individual props of each post
     */
-    var posts = this.props.posts.map(function(post){
-        return (
-
-          <Post key={post.id} uuid={post.uuid} content={post.content} createdAt={post.createdAt} lat={post.latitude} long={post.longitude} />
-
-        )
+    var propPosts = this.props.posts;
+    var posts = propPosts.map(function (post) {
+      return (
+          <Post key={post.id} id={post.id} uuid={post.uuid} content={post.content} createdAt={post.createdAt} latitude={post.latitude} longitude={post.longitude} />
+        );
     });
 
 
     // And rendering it
     return (
-
       <div className="">
         <div className="post-list center-align">{posts}</div>
         <div className="fixed-action-btn">
@@ -34,7 +30,7 @@ var PostsList = React.createClass({
         </a>
         </div>
       </div>
-    )
+    );
   }
 });
 
