@@ -4,9 +4,12 @@ var Post = require('./Post.jsx');
 
 /**
  * React Class for the Post listing component.
- * It creates child components
+ * This isn't an overly complex component:
+ * It creates child 'Post' components from the
+ * `posts` prop and they will handle themselves.
  */
 var PostsList = React.createClass({
+
   render: function () {
     /*
     *  Creating an array of `Post` components that hold
@@ -22,7 +25,7 @@ var PostsList = React.createClass({
 
     // And rendering it
     return (
-      <div className="">
+      <div className="container">
         <div className="post-list center-align">{posts}</div>
         <div className="fixed-action-btn">
         <a className="btn-floating btn-large waves-effect waves-light amber">

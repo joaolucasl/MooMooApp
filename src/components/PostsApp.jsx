@@ -3,10 +3,18 @@ var PostsList = require('./PostsList.jsx');
 var Navbar = require('./Navbar.jsx');
 
 var PostsApp = React.createClass({
+  /*  WatchID will hold the Geolocation watcher, to keep us updated on
+  *   the user's current location.
+  */
+  watchID: null,
   getInitialState: function () {
-    //  Setting the initial state of data
+    /*  This isn't meant for synchronisation, but for initialisation.
+    *   The only purpose we get the `posts` data from the props is
+    *   to intialise the application with the data from the backend.
+    */
     return {
-      posts: this.props.posts
+      posts: this.props.posts,
+      position: null
     };
   },
   /* `componentWillReceiveProps` will run before
@@ -19,6 +27,29 @@ var PostsApp = React.createClass({
         posts: newProps.posts
       }
       );
+  },
+  componentWillMount: function () {
+    /*  Checking availability of Geolocation features.
+    *   If not available, the application will further
+    *   render an error message instead of the app content
+    */
+    var self = this;
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (current) {
+        // Setting the current location state for further use
+        self.setState({
+          position: {
+            latitude: current.coords.latitude,
+            longitude: current.coords.longitude
+          }
+        });
+      });
+    } else {
+      self.setState({
+        position: null
+      });
+    }
   },
   render: function () {
     //  TODO Update hardcoded `navbarLinks` functionality
@@ -34,6 +65,12 @@ var PostsApp = React.createClass({
         hash: '#b'
       }
     ];
+
+    /*  Checking if the position state:
+     *  If there's a position defined,
+     *  renders the application as normal.
+     *  If not, shows error message.
+     **/
 
     return (
       <div className="posts-app">
