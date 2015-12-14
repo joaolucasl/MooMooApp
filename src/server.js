@@ -2,6 +2,8 @@ var express = require('express');
 var cons = require('consolidate');
 var hs = require('handlebars');
 var fs = require('fs');
+var sessions = require('client-sessions');
+var nuuid = require('node-uuid');
 
 var routes = require(__dirname + '/routes/routes');
 var app = express();
@@ -27,11 +29,35 @@ app.engine('html', cons.handlebars);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
+//  Secure Session definition for user persistency
+app.use(sessions({
+  cookieName: 'userSession', // cookie name dictates the key name added to the request object
+  secret: 'jairo-the-cow', // our secret string for encryption
+  duration: 30 * 24 * 60 * 60 * 1000 // The user session will be valid for 30 days
+}));
+
+/*
+ * A Middleware function to reset the duration to
+ * 30 days each time the user is active again.
+ * Since we don't have logins, using sessions is
+ * the only way to ensure the user has access
+ * to their content when they use the app again.
+ **/
+function userSessionMiddleware(req, res, next) {
+  if (req.userSession.uuid) {
+    req.userSession.setDuration(30 * 24 * 60 * 60 * 1000);
+  } else {
+    req.userSession.uuid = nuuid.v1();
+  }
+  console.dir(req.userSession);
+  next();
+}
+
 //  Allowing public folder to be accessed by clients via main route
 app.use(express.static(__dirname + '/public'));
 
 // Setting the routes.js file as the responsible for the main routes.
-app.use('/', routes);
+app.use('/', userSessionMiddleware, routes);
 
 server = app.listen(3000, function () {
   var host = server.address().address;

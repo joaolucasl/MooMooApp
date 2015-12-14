@@ -52,7 +52,7 @@ var PostsApp = React.createClass({
     }
   },
   render: function () {
-    //  TODO Update hardcoded `navbarLinks` functionality
+    //  TODO Update hardcoded `navbarLinks` functionalities
     var navbarLinks = [
       {
         href: 'a',
@@ -66,7 +66,7 @@ var PostsApp = React.createClass({
       }
     ];
 
-    /*  Checking if the position state:
+    /*  Checking for the 'position' state:
      *  If there's a position defined,
      *  renders the application as normal.
      *  If not, shows error message.
