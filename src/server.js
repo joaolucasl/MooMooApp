@@ -4,7 +4,7 @@ var hs = require('handlebars');
 var fs = require('fs');
 var sessions = require('client-sessions');
 var nuuid = require('node-uuid');
-
+var bodyParser = require('body-parser');
 var routes = require(__dirname + '/routes/routes');
 var app = express();
 var server;
@@ -28,6 +28,9 @@ fs.readdirSync(partials).forEach(function (file) {
 app.engine('html', cons.handlebars);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
+
+//  Body parsing middleware for POST requests
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //  Secure Session definition for user persistency
 app.use(sessions({
@@ -58,6 +61,7 @@ app.use(express.static(__dirname + '/public'));
 
 // Setting the routes.js file as the responsible for the main routes.
 app.use('/', userSessionMiddleware, routes);
+
 
 server = app.listen(3000, function () {
   var host = server.address().address;

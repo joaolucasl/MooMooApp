@@ -1,40 +1,27 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
-var postController = require('../controllers/posts');
-var socket = require('../controllers/socket');
-
+var PostsRouter = require('./posts.routes.js');
 var DB = require('../database/db.js');
 var Posts = DB.models.Post;
 
-
-
-router.get("/", function (req, res) {
-
-  var data = {};
+router.get('/', function (req, res) {
   Posts
     .findAll()
     .then(function (posts) {
-      res.render("index", {
+      res.render('index', {
         state: JSON.stringify(posts)
       });
     })
     .catch(function (err) {
-      res.render("index", {
+      res.render('index', {
         state: JSON.stringify({
-          "message": err
+          'message': err
         })
       });
-
     });
-
-
-})
-
-router.get("/posts/", postController.listAllPosts);
-
-router.get("/posts/send/", function (req, res) {
-  socket.emitToAll("HEY!");
-  res.send("Ok");
 });
+
+router.use('/api/posts', PostsRouter);
+
 
 module.exports = router;

@@ -9,14 +9,14 @@ var socketio = require('socket.io');
 var io;
 var connectedSockets = [];
 
-module.exports.listen = function (http) {
+module.exports = {
+  listen: function (http) {
+    this.io = socketio.listen(http);
 
-  this.io = socketio.listen(http);
-
-  this.io.on('connection', function (socket) {
-    console.log('SOMEONE CONNECTED!');
-    connectedSockets.push(socket);
-    socket.emit("YAY", "YAY");
+    this.io.on('connection', function (socket) {
+      console.log('SOMEONE CONNECTED!');
+      connectedSockets.push(socket);
+      socket.emit('YAY', 'YAY');
   });
 
   this.io.on('disconnect', function () {
@@ -25,10 +25,10 @@ module.exports.listen = function (http) {
   });
 
   return this.io;
-}
-
-module.exports.emitToAll = function (message) {
+},
+emitToAll: function (message) {
   connectedSockets.map(function (socket) {
     socket.emit('update', message);
   });
+}
 }
