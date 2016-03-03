@@ -16,9 +16,9 @@ After downloading or cloning this repository, you should go to the `src` folder,
    *Note: The system is being developed with MySQL, but if you want to use PostgreSQL, for instance, you can do so by updating the `package.json` with the respective libraries and `src/config/config.json` to reflect so.*
    
    
-   This project uses [Gulp](http://gulpjs.com) to run tasks (primarily to transpile and bundle our React code and its dependencies). Before running the project, run:
+   This project uses [Webpack](https://webpack.github.io/) to primarily to transpile, optmise and bundle our React code and its dependencies. Before running the project, run:
    
-    $ gulp 
+    $ webpack
     
 This will bundle the project code (Components, etc), React and ReactDOM libraries and other dependencies to `/public/js/app.js`, which will be required in the client-side of our application.
 

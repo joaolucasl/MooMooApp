@@ -5,7 +5,7 @@ var router = express.Router();
 
 
 
-router.all('/all', postController.listAllPosts);
-router.all('/new', postController.newPost);
+router.all('/all', postController.listAll);
+router.post('/new', postController.new);
 
 module.exports = router;

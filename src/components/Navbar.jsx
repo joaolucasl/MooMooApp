@@ -7,10 +7,25 @@ var React = require('react');
  */
 var Navbar = React.createClass({
   propTypes: {
-    links: React.PropTypes.array.isRequired
+    links: React.PropTypes.array.isRequired,
+    position: React.PropTypes.object.isRequired
+  },
+  getInitialState: function () {
+    return {
+    links: null,
+    position: null
+    }
+  },
+  componentWillMount: function () {
+    console.log(this.props.position);
+    this.setState({
+      position: this.props.position,
+      links:  this.props.links
+    });
   },
   render: function () {
-    var links = this.props.links;
+    var links = this.state.links;
+    console.log("Component rendering");
     //  Building the list of links
     var menuLinks = links.map(function (current) {
       //  TODO Update `li` items to proper object design
@@ -18,13 +33,19 @@ var Navbar = React.createClass({
       <li key={current.hash}><a href={current.href}>{current.title}</a></li>
       );
     });
-    //  Appending a Map image as placeholder for future position map component
-    menuLinks.push(
-      <li key="map-li">
-        <img className="responsive-img" src="http://maps.googleapis.com/maps/api/staticmap?center=-23.289,-47.68&zoom=13&scale=false&size=300x200&maptype=hybrid&format=png&visual_refresh=true" alt="Google Map of -23.289,-47.68"/>
-      </li>
-    );
 
+    // Checking for the existence of the position object and its values
+    if (this.state.position) {
+      //  Building the img src string
+      var imgSrc = 'http://maps.googleapis.com/maps/api/staticmap?center=' + this.state.position.latitude + ',' + this.state.position.longitude + '&zoom=13&scale=false&size=300x200&maptype=hybrid&format=png&visual_refresh=true'
+      //  Appending a Map image as placeholder for future position map component
+      console.log(imgSrc);
+      menuLinks.push(
+        <li key="map-li">
+          <img className="responsive-img" src={imgSrc} />
+        </li>
+      );
+    }
     //  Creating the Sibebar DOM Object from the list of links
     return (
       <nav className="amber">

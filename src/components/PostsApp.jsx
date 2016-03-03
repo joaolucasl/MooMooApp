@@ -29,27 +29,8 @@ var PostsApp = React.createClass({
       );
   },
   componentWillMount: function () {
-    /*  Checking availability of Geolocation features.
-    *   If not available, the application will further
-    *   render an error message instead of the app content
-    */
-    var self = this;
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (current) {
-        // Setting the current location state for further use
-        self.setState({
-          position: {
-            latitude: current.coords.latitude,
-            longitude: current.coords.longitude
-          }
-        });
-      });
-    } else {
-      self.setState({
-        position: null
-      });
-    }
+    //  TODO - Rewrite Geolocation functions with watcherID
+    //if(navigator.geolocation.)
   },
   render: function () {
     //  TODO Update hardcoded `navbarLinks` functionalities
@@ -66,19 +47,13 @@ var PostsApp = React.createClass({
       }
     ];
 
-    /*  Checking for the 'position' state:
-     *  If there's a position defined,
-     *  renders the application as normal.
-     *  If not, shows error message.
-     **/
-
-    return (
-      <div className="posts-app">
-      <Navbar links={navbarLinks}/>
-        <PostsList posts={this.state.posts} />
-      </div>
-    );
-  }
+      return (
+        <div className="posts-app">
+          <Navbar links={navbarLinks} position={this.state.position}/>
+          <PostsList posts={this.state.posts} />
+        </div>
+      );
+    }
 });
 
 module.exports = PostsApp;

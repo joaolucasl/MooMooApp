@@ -21,6 +21,7 @@ router.get('/', function (req, res) {
     });
 });
 
+
 router.use('/api/posts', PostsRouter);
 
 

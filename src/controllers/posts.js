@@ -8,7 +8,7 @@ var Posts = DB.models.Post;
  * @param {[[Type]]} req [[Description]]
  * @param {[[Type]]} res [[Description]]
  */
-exports.listAllPosts = function (req, res) {
+exports.listAll = function (req, res) {
   Posts
     .findAll()
     .then(function (posts) {
@@ -25,7 +25,7 @@ exports.listAllPosts = function (req, res) {
  * @param {[[Type]]} req [[Description]]
  * @param {[[Type]]} res [[Description]]
  */
-exports.newPost = function (req, res){
+exports.new = function (req, res){
   res.send(req.body);
 }
 
